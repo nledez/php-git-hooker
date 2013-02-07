@@ -25,14 +25,21 @@ function generateRandomString($length = 10) {
   return $randomString;
 }
 
-header("Content-Type: text/plain");
-
 if ($repo_url == '') {
+  echo "<html><body>";
   echo "Give me a repo_url: \n";
   echo curPageURL() . "?repo_url=http://gitbut/username/repository.git\n";
+  echo "<form>";
+  echo "<input type='text' name='repo_url'>";
+  echo "<br>";
+  echo "<input type='submit' value='Git clone & Co.'>";
+  echo "</form>";
+  echo "</body></html>";
 } elseif(file_exists(".git")) {
+  header("Content-Type: text/plain");
   echo "Allready installed\n";
 } else {
+  header("Content-Type: text/plain");
   echo "git clone $repo_url $dest\n";
   echo `git clone $repo_url $dest 2>&1`;
 
